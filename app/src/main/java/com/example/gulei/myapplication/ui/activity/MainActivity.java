@@ -39,6 +39,8 @@ public class MainActivity extends BaseActivity {
         initData();
         initView();
         tempPresenter.method("sds");
+
+
     }
     private void initView(){
         mRecyclerView = (XRecyclerView)findViewById(R.id.recyclerview);
