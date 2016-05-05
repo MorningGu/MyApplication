@@ -2,9 +2,7 @@ package com.example.gulei.myapplication.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +15,6 @@ import com.example.gulei.myapplication.Config;
 import com.example.gulei.myapplication.R;
 import com.example.gulei.myapplication.common.base.BaseActivity;
 import com.example.gulei.myapplication.mvp.presenter.TempPresenter;
-import com.example.gulei.myapplication.ui.activity.image.ImageActivity;
 import com.example.gulei.myapplication.ui.view.fresco.FImageView;
 import com.example.gulei.myapplication.ui.view.fresco.FrescoImageLoader;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;

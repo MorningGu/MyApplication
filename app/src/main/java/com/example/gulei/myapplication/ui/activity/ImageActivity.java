@@ -1,4 +1,4 @@
-package com.example.gulei.myapplication.ui.activity.image;
+package com.example.gulei.myapplication.ui.activity;
 
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;

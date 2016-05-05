@@ -45,7 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.image.ImageActivity"></activity>
+        <activity android:name=".ui.activity.ImageActivity"></activity>
     </application>
 
 </manifest>
