@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gulei.myapplication.R;
-import com.example.gulei.myapplication.common.base.BaseActivity;
+import com.example.gulei.myapplication.ui.base.BaseActivity;
 import com.example.gulei.myapplication.ui.view.fresco.photoview.HackyViewPager;
 import com.example.gulei.myapplication.ui.view.fresco.photoview.PhotoView;
 

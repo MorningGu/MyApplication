@@ -16,11 +16,11 @@ public class LoadingDialog extends Dialog {
    private Context context;
    private boolean isTouchDismiss = true;
 
-   public LoadingDialog(Context context, boolean isShow) {
+   public LoadingDialog(Context context, boolean isTouchDismiss) {
       //设置style
       super(context, R.style.alert);
       this.context = context;
-      this.isTouchDismiss = isShow;
+      this.isTouchDismiss = isTouchDismiss;
    }
 
    @Override

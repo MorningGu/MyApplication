@@ -1,4 +1,4 @@
-package com.example.gulei.myapplication.common.base;
+package com.example.gulei.myapplication.ui.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

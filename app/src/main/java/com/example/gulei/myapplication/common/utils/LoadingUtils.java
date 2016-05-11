@@ -12,17 +12,17 @@ public class LoadingUtils {
    
    private LoadingDialog loadingDialog;
    private Context context;
-   private boolean isShow = true;
+   private boolean isTouchDismiss = true;
 
    public LoadingUtils(Context context, boolean isShow) {
       this.context = context;
-      this.isShow = isShow;
+      this.isTouchDismiss = isShow;
    }
 
 
    public void showLoading() {
       if (loadingDialog == null) {
-         loadingDialog = new LoadingDialog(context, isShow);
+         loadingDialog = new LoadingDialog(context, isTouchDismiss);
       }
       if (!loadingDialog.isShowing()) {
          loadingDialog.show();

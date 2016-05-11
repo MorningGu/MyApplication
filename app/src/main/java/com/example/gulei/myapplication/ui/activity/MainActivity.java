@@ -1,6 +1,7 @@
 package com.example.gulei.myapplication.ui.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gulei.myapplication.Config;
 import com.example.gulei.myapplication.R;
-import com.example.gulei.myapplication.common.base.BaseActivity;
+import com.example.gulei.myapplication.common.utils.DialogUtils;
+import com.example.gulei.myapplication.ui.base.BaseActivity;
 import com.example.gulei.myapplication.mvp.presenter.TempPresenter;
 import com.example.gulei.myapplication.ui.view.fresco.FImageView;
 import com.example.gulei.myapplication.ui.view.fresco.FrescoImageLoader;
@@ -36,7 +39,12 @@ public class MainActivity extends BaseActivity {
         initData();
         initView();
         tempPresenter.method("sds");
-
+        DialogUtils.showDialog(this, "标题", "显示内容", true, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"点击了确定",Toast.LENGTH_LONG).show();
+            }
+        });
     }
     private void initView(){
         mRecyclerView = (XRecyclerView)findViewById(R.id.recyclerview);
