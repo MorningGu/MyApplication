@@ -1,6 +1,5 @@
 package com.example.gulei.myapplication.common.utils;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;

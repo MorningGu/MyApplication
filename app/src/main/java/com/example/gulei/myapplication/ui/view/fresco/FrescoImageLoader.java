@@ -93,11 +93,12 @@ public class FrescoImageLoader {
         Resources resources = context.getResources();
         GenericDraweeHierarchy hierarchy = new GenericDraweeHierarchyBuilder(resources)
                 .setFadeDuration(300)
-                .setPlaceholderImage(defaultDrawable)
-                .setFailureImage(defaultDrawable)
 //                .setProgressBarImage(new ProgressBarDrawable())
                 .build();
-
+        if(defaultDrawable!=null){
+            hierarchy.setPlaceholderImage(defaultDrawable);
+            hierarchy.setFailureImage(defaultDrawable);
+        }
         final DraweeHolder<GenericDraweeHierarchy> draweeHolder = DraweeHolder.create(hierarchy, context);
         imageView.setOnImageViewListener(new FImageView.OnImageViewListener() {
             @Override
@@ -122,7 +123,9 @@ public class FrescoImageLoader {
             public void onDraw(Canvas canvas) {
                 Drawable drawable = draweeHolder.getHierarchy().getTopLevelDrawable();
                 if (drawable == null) {
-                    imageView.setImageDrawable(defaultDrawable);
+                    if(defaultDrawable!=null){
+                        imageView.setImageDrawable(defaultDrawable);
+                    }
                 } else {
                     imageView.setImageDrawable(drawable);
                 }
