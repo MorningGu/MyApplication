@@ -9,24 +9,12 @@
     <include
         layout="@layout/common_header"
         />
-    <FrameLayout
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
-        <ImageView
-            android:id="@+id/iv_empty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:visibility="gone"
-            />
-        <com.jcodecraeer.xrecyclerview.XRecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never"
-            />
-    </FrameLayout>
+        android:overScrollMode="never"
+        />
 
 
 </LinearLayout>

@@ -170,8 +170,8 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
 
 	public int getVisibleHeight() {
         LayoutParams lp = (LayoutParams) mContainer.getLayoutParams();
-		return lp.height;
-	}
+        return lp.height;
+    }
 
     @Override
     public void onMove(float delta) {
