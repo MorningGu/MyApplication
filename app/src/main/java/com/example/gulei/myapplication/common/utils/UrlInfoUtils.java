@@ -18,7 +18,7 @@ public class UrlInfoUtils {
     private static String mHtml;
     public static int server_port = 5222;
     public static String server_name = "highing.cn";
-    private static Boolean isRelease;
+    private static Boolean isRelease = GApplication.getInstance().isDebug() ;
     private static String urlCode;
 
     /**
@@ -27,7 +27,7 @@ public class UrlInfoUtils {
      */
     public static String getAppUrl() {
         if(TextUtils.isEmpty(appUrl)){
-            if(UrlInfoUtils.getRelease()){
+            if(isRelease){
                 setAppUrl(GApplication.getInstance().getApplicationContext().getString(R.string.release_app_url)+UrlInfoUtils.getUrlCode());
             }else{
                 setAppUrl(GApplication.getInstance().getApplicationContext().getString(R.string.debug_app_url)+UrlInfoUtils.getUrlCode());
@@ -111,24 +111,6 @@ public class UrlInfoUtils {
 //        return imUrl;
 //    }
 
-
-    private static Boolean getRelease() {
-        if(UrlInfoUtils.isRelease == null){
-            try {
-                ApplicationInfo appInfo = GApplication.getInstance().getPackageManager()
-                        .getApplicationInfo(GApplication.getInstance().getPackageName(),
-                                PackageManager.GET_META_DATA);
-                setRelease(appInfo.metaData.getBoolean("HIGHING_IS_RELEASE"));
-            } catch (Exception e) {
-
-            }
-        }
-        return isRelease;
-    }
-
-    private static void setRelease(Boolean release) {
-        isRelease = release;
-    }
 
     private static String getUrlCode() {
         if(TextUtils.isEmpty(UrlInfoUtils.urlCode)){

@@ -2,6 +2,8 @@ package com.example.gulei.myapplication;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -14,6 +16,7 @@ import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.cache.CacheMode;
 import com.lzy.okhttputils.model.HttpHeaders;
 import com.lzy.okhttputils.model.HttpParams;
+import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.AnalyticsConfig;
 
 import java.lang.reflect.Field;
@@ -27,16 +30,50 @@ public class GApplication extends Application {
     //设备id工厂
     private DeviceUuidFactory deviceUuidFactory;
 
+    private boolean isDebug = false;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        init();
+    }
+    private void init(){
+        //内存分析工具
+        LeakCanary.install(this);
         /** 设置是否对日志信息进行加密, 默认false(不加密). */
         AnalyticsConfig.enableEncrypt(true);
         mInstance = this;
         deviceUuidFactory = new DeviceUuidFactory(this.getApplicationContext());
         FrescoImageLoader.init(this);//这里是一个初始化
         initOkHttp();
+        initDebug();
     }
+
+    /**
+     * 初始化是否是debug
+     */
+    private void initDebug(){
+        ApplicationInfo appInfo = null;
+        try {
+            appInfo = GApplication.getInstance().getPackageManager()
+                    .getApplicationInfo(GApplication.getInstance().getPackageName(),
+                            PackageManager.GET_META_DATA);
+            isDebug =  appInfo.metaData.getBoolean("IS_RELEASE");
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 是不是debug
+     * @return
+     */
+    public boolean isDebug(){
+        return isDebug;
+    }
+    /**
+     * 初始化okHttp
+     */
     private void initOkHttp(){
 //        HttpHeaders headers = new HttpHeaders();
 //        headers.put("commonHeaderKey1", "commonHeaderValue1");    //所有的 header 都 不支持 中文

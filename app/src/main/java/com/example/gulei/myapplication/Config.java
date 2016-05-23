@@ -17,6 +17,6 @@ public class Config {
             File.separator +"Cache";
     public static final int CACHE_SIZE_DISK = 200*1024*1024;
     public static final int IMAGE_SMALL = 200;
-    public static final int IMAGE_NORMAL = 800;
+    public static final int IMAGE_NORMAL = 600;
     public static final int IMAGE_BIG = 1200;
 }
