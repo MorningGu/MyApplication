@@ -15,6 +15,8 @@ public class Config {
             + "GApplication";
     public static final String CACHE_DIR = BASE_DIR +
             File.separator +"Cache";
+    public static final String PHOTO_DIR = BASE_DIR +
+            File.separator +"Photo";
     public static final int CACHE_SIZE_DISK = 200*1024*1024;
     public static final int IMAGE_SMALL = 200;
     public static final int IMAGE_NORMAL = 600;

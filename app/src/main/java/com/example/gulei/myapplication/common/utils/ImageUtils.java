@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
 import android.text.TextUtils;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
@@ -90,5 +92,23 @@ public class ImageUtils {
             }
         }
         return inSampleSize;
+    }
+    public static Bitmap compressImageZl(Bitmap image) {
+        if(image==null){
+            return null;
+        }
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 100;
+        PrintUtils.d("compressImageZl","-------"+baos.toByteArray().length);
+        while (baos.toByteArray().length / 1024 > 1024) { //循环判断如果压缩后图片是否大于1M,大于继续压缩
+            PrintUtils.d("compressImageZl","-------"+baos.toByteArray().length);
+            baos.reset();//重置baos即清空baos
+            image.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
+            options -= 10;//每次都减少10
+        }
+        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中
+        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
+        return bitmap;
     }
 }

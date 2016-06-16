@@ -16,6 +16,7 @@ import com.example.gulei.myapplication.ui.base.BaseActivity;
 import com.example.gulei.myapplication.mvp.presenter.TempPresenter;
 import com.example.gulei.myapplication.ui.base.BaseQuickAdapter;
 import com.example.gulei.myapplication.ui.base.BaseViewHolder;
+import com.example.gulei.myapplication.ui.gallery.GalleryActivity;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -49,7 +50,8 @@ public class MainActivity extends BaseActivity {
         mAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(MainActivity.this, ImageActivity.class);
+//                Intent intent = new Intent(MainActivity.this, ImageActivity.class);
+                Intent intent = new Intent(MainActivity.this, GalleryActivity.class);
                 startActivity(intent);
             }
         });
@@ -96,7 +98,7 @@ public class MainActivity extends BaseActivity {
             super(context, R.layout.item, datas);
         }
         @Override
-        protected void convert(BaseViewHolder helper, String item) {
+        protected void convert(BaseViewHolder helper, String item,int position) {
             helper.setText(R.id.text,item)
                     .setImageUri(R.id.fiv,"res:///"+R.mipmap.image_5,R.mipmap.ic_launcher,Config.IMAGE_SMALL)
                     .setOnClickListener(R.id.text, new OnItemChildClickListener())

@@ -21,7 +21,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.gulei.myapplication.ui.view.fresco.FImageView;
-import com.example.gulei.myapplication.ui.view.fresco.FrescoImageLoader;
+import com.example.gulei.myapplication.common.utils.ImageLoaderUtils;
 
 
 /**
@@ -170,7 +170,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     public BaseViewHolder setImageUri(int viewId, String imageUri, int defResourceId,int size) {
         FImageView view = getView(viewId);
         Drawable drawable = context.getResources().getDrawable(defResourceId);
-        FrescoImageLoader.getInstance().displayImage(imageUri,view,drawable, size,size);
+        ImageLoaderUtils.getInstance().displayImage(imageUri,view,drawable, size,size);
         return this;
     }
 

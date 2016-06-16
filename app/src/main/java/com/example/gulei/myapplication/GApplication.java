@@ -11,11 +11,9 @@ import android.os.Vibrator;
 
 import com.example.gulei.myapplication.common.utils.DeviceUuidFactory;
 
-import com.example.gulei.myapplication.ui.view.fresco.FrescoImageLoader;
+import com.example.gulei.myapplication.common.utils.ImageLoaderUtils;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.cache.CacheMode;
-import com.lzy.okhttputils.model.HttpHeaders;
-import com.lzy.okhttputils.model.HttpParams;
 import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.AnalyticsConfig;
 
@@ -32,6 +30,7 @@ public class GApplication extends Application {
 
     private boolean isDebug = false;
 
+    private Boolean hasCamera = null;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -44,11 +43,31 @@ public class GApplication extends Application {
         AnalyticsConfig.enableEncrypt(true);
         mInstance = this;
         deviceUuidFactory = new DeviceUuidFactory(this.getApplicationContext());
-        FrescoImageLoader.init(this);//这里是一个初始化
+        ImageLoaderUtils.init(this);//这里是一个初始化
         initOkHttp();
         initDebug();
     }
 
+    /**
+     * 判断是否有相机
+     * @return
+     */
+    public boolean hasCamera(){
+        if(hasCamera==null){
+            PackageManager pm = getPackageManager();
+            // FEATURE_CAMERA - 后置相机
+            // FEATURE_CAMERA_FRONT - 前置相机
+            if (!pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
+                    && !pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)) {
+//                Log.i("camera", "non-support");
+                hasCamera = false;
+            } else {
+//                Log.i("camera", "support");
+                hasCamera = true;
+            }
+        }
+        return hasCamera;
+    }
     /**
      * 初始化是否是debug
      */
@@ -58,7 +77,7 @@ public class GApplication extends Application {
             appInfo = GApplication.getInstance().getPackageManager()
                     .getApplicationInfo(GApplication.getInstance().getPackageName(),
                             PackageManager.GET_META_DATA);
-            isDebug =  appInfo.metaData.getBoolean("IS_RELEASE");
+            isDebug =  !appInfo.metaData.getBoolean("IS_RELEASE");
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

@@ -74,7 +74,33 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
             });
         }
     }
-
+    /**
+     * 导航栏，左边图片和title右边文字
+     * @param title
+     */
+    protected void initTitleAndRightText(String title, String rightText, HeadLayout.OnRightClickListener onRightClickListener){
+        mHeadLayout = (HeadLayout)findViewById(R.id.common_header);
+        if(mHeadLayout!=null){
+            mHeadLayout.initView();
+            mHeadLayout.initTitleAndImageText(title, R.mipmap.ic_launcher, rightText,new HeadLayout.OnLeftClickListener() {
+                @Override
+                public void onClick() {
+                    AppManager.getAppManager().finishActivity(BaseActivity.this);
+                }
+            },onRightClickListener);
+        }
+    }
+    /**
+     * 导航栏，左边图片和title右边文字
+     * @param title
+     */
+    protected void initTitleAndRightText(String title, String rightText, HeadLayout.OnLeftClickListener onLeftClickListener, HeadLayout.OnRightClickListener onRightClickListener){
+        mHeadLayout = (HeadLayout)findViewById(R.id.common_header);
+        if(mHeadLayout!=null){
+            mHeadLayout.initView();
+            mHeadLayout.initTitleAndImageText(title, R.mipmap.ic_launcher, rightText,onLeftClickListener,onRightClickListener);
+        }
+    }
     @Override
     public void showLoading() {
         if (mLoadingUtil == null) {

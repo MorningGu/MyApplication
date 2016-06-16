@@ -322,14 +322,14 @@ public abstract class BaseQuickAdapter<T> extends RecyclerView.Adapter<RecyclerV
 
         switch (holder.getItemViewType()) {
             case 0:
-                convert((BaseViewHolder) holder, mData.get(positions));
+                convert((BaseViewHolder) holder, mData.get(positions),positions);
                 initItemClickListener(holder, (BaseViewHolder) holder);
                 addAnimation(holder);
                 break;
             case EMPTY_VIEW:
                 break;
             default:
-                convert((BaseViewHolder) holder, mData.get(positions));
+                convert((BaseViewHolder) holder, mData.get(positions),positions);
                 onBindDefViewHolder((BaseViewHolder) holder, mData.get(positions));
                 initItemClickListener(holder, (BaseViewHolder) holder);
                 break;
@@ -375,6 +375,15 @@ public abstract class BaseQuickAdapter<T> extends RecyclerView.Adapter<RecyclerV
         notifyDataSetChanged();
     }
 
+    /**
+     * 整个数据源的更新，会先clear
+     * @param data
+     */
+    public void notifyDataReset(List<T> data){
+        mData.clear();
+        mData.addAll(data);
+        notifyDataSetChanged();
+    }
     private void initItemClickListener(final RecyclerView.ViewHolder holder, BaseViewHolder baseViewHolder) {
         if (onRecyclerViewItemClickListener != null) {
             baseViewHolder.convertView.setOnClickListener(new View.OnClickListener() {
@@ -487,7 +496,7 @@ public abstract class BaseQuickAdapter<T> extends RecyclerView.Adapter<RecyclerV
      * @param helper A fully initialized helper.
      * @param item   The item that needs to be displayed.
      */
-    protected abstract void convert(BaseViewHolder helper, T item);
+    protected abstract void convert(BaseViewHolder helper, T item,int position);
 
 
     @Override
